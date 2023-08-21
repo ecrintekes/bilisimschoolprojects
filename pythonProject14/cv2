@@ -1,0 +1,25 @@
+import pygame
+import random
+pygame.init()
+FPS = 30
+saat = pygame.time.Clock()
+genislik = 1280
+yukseklik = 720
+goruntu_yuzeyi = pygame.display.set_mode((genislik,yukseklik))
+karakter = pygame.image.load("final_karakter.png")
+karakter_koordinati = karakter.get_rect()
+karakter_koordinati.center = (genislik//2,yukseklik//2)
+pizza = pygame.image.load("final_pizza.png")
+pizza_koordinati = pizza.get_rect()
+pizza_koordinati.center = (random.randint(50,genislik-50),random.randint(50,yukseklik-50))
+durum = True
+while durum:
+    for etkinlik in pygame.event.get():
+        if etkinlik.type == pygame.QUIT:
+            durum = False
+    if pizza_koordinati.colliderect(karakter_koordinati):
+        pizza_koordinati.x = random.randint(50,genislik-50)
+        pizza_koordinati.y = random.randint(50, yukseklik - 50)
+    goruntu_yuzeyi.blit(karakter,karakter_koordinati)
+    goruntu_yuzeyi.blit(pizza,pizza_koordinati)
+    
